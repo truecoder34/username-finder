@@ -18,3 +18,7 @@ func Username(c *gin.Context) {
 
 	c.JSON(http.StatusOK, matchedUrls)
 }
+
+func QRcodegenerator(c *gin.Context) {
+
+}
