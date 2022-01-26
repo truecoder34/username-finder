@@ -5,9 +5,14 @@ import (
 )
 
 type usernameCheck struct{}
+type qrcodeGenerate struct{}
 
 type usernameService interface {
 	UsernameCheck(urls []string) []string
+}
+
+type qrcodeService interface {
+	QRCodeGenerate(urls []string) []string
 }
 
 var (
@@ -15,11 +20,12 @@ var (
 		usernameCheck struct implements usernameService interface
 	*/
 	UsernameService usernameService = &usernameCheck{}
+
+	QRcodeService qrcodeService = &qrcodeGenerate{}
 )
 
 /*
-	[ param 1 ] - recieve slice of URLs to process
-
+	[ param 1 ] - recieve slice of URLs to process\
 */
 func (u *usernameCheck) UsernameCheck(urls []string) []string {
 	c := make(chan string)
@@ -52,4 +58,14 @@ func (u *usernameCheck) UsernameCheck(urls []string) []string {
 		matchingLinks = append(matchingLinks, v)
 	}
 	return matchingLinks
+}
+
+/*
+	Method should return QR code object
+*/
+func (u *qrcodeGenerate) QRCodeGenerate(urls []string) []string {
+
+	qrCodeObject := []string{}
+
+	return qrCodeObject
 }
