@@ -20,18 +20,19 @@ func Username(c *gin.Context) {
 }
 
 func QRcodegenerator(c *gin.Context) {
-	// 1 - get link
-
-	// 2 - check that it exists
-
-	// 3 - send png user to picture
+	// 1 - get links list
 	var urls []string
 	if err := c.ShouldBindJSON(&urls); err != nil {
 		c.JSON(http.StatusUnprocessableEntity, errors.New("invalid JSON body"))
 		return
 	}
 
-	qrcode := service.QRcodeService.QRCodeGenerate(urls)
+	// 2 - check that it exists. operate only with manthed URLS
+	matchedUrls := service.UsernameService.UsernameCheck(urls)
+
+	// 3 - send png user to picture
+
+	qrcode := service.QRcodeService.QRCodeGenerate(matchedUrls)
 
 	//
 	c.JSON(http.StatusOK, qrcode)
