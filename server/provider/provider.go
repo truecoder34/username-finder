@@ -20,6 +20,8 @@ var Checker checkInterface = &checker{}
 	- checks passed URL and sent answer to CHANNEL
 	[ param 1 ] url : url
 	[ param 2 ] c : chan string - channel to transport STRING data between goroutines
+
+	reciever function.  pointer on checker struct
 */
 func (check *checker) CheckUrl(url string, c chan string) {
 	resp, err := client.ClientCall.GetValue(url) // call GetValue() to get data from URL

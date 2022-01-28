@@ -1,6 +1,7 @@
 package service
 
 import (
+	"username-finder/server/helper"
 	"username-finder/server/provider"
 )
 
@@ -65,9 +66,23 @@ func (u *usernameCheck) UsernameCheck(urls []string) []string {
 /*
 	Method should return QR code object
 */
-func (u *qrcodeGenerate) QRCodeGenerate(urls []string) []string {
+func (u *qrcodeGenerate) QRCodeGenerate(validUrls []string) []string {
+	/*
+		process each URL in separete GOroutine
+	*/
+	c := make(chan string) // create channel via make
+	qrCodeObjects := []string{}
 
-	qrCodeObject := []string{}
+	for _, url := range validUrls {
+		/*
+			start up goroutine for each url any data\error obtained ---> to channel
+		*/
+		go helper.QRcode.GenerateQRCode(url, c)
+	}
 
-	return qrCodeObject
+	for i := 0; i < len(validUrls); i++ {
+		qrCodeObjects = append(qrCodeObjects, <-c)
+	}
+
+	return qrCodeObjects
 }
