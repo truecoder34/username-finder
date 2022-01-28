@@ -20,11 +20,17 @@ func Username(c *gin.Context) {
 }
 
 func QRcodegenerator(c *gin.Context) {
+	// 1 - get link
+
+	// 2 - check that it exists
+
+	// 3 - send png user to picture
 	var urls []string
 	if err := c.ShouldBindJSON(&urls); err != nil {
 		c.JSON(http.StatusUnprocessableEntity, errors.New("invalid JSON body"))
 		return
 	}
+
 	qrcode := service.QRcodeService.QRCodeGenerate(urls)
 
 	//

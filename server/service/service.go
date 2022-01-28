@@ -25,10 +25,10 @@ var (
 )
 
 /*
-	[ param 1 ] - recieve slice of URLs to process\
+	[ param 1 ] - recieve slice of URLs to process
 */
 func (u *usernameCheck) UsernameCheck(urls []string) []string {
-	c := make(chan string)
+	c := make(chan string) // create channel via make
 	var links []string
 	matchingLinks := []string{}
 
@@ -47,7 +47,9 @@ func (u *usernameCheck) UsernameCheck(urls []string) []string {
 		links = append(links, <-c)
 	}
 
-	//Remove the "no_match" and "cant_access_resource" values from the links array:
+	/*
+		Remove the "no_match" and "cant_access_resource" values from the links array. Kind of Filtering
+	*/
 	for _, v := range links {
 		if v == "cant_access_resource" {
 			continue
