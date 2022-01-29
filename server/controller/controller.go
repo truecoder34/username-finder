@@ -28,15 +28,15 @@ func QRcodegenerator(c *gin.Context) {
 		return
 	}
 
-	// 2 - check that it exists. operate only with manthed URLS
+	// 2 - check that URL exists.
 	matchedUrls := service.UsernameService.UsernameCheck(urls)
 
+	// generate QR codes for valif urls
+	qrcodes := service.QRcodeService.QRCodeGenerate(matchedUrls)
+
 	// 3 - send png user to picture
+	qr_like_bytes, _ := base64.StdEncoding.DecodeString(qrcodes[0])
 
-	qrcode := service.QRcodeService.QRCodeGenerate(matchedUrls)
+	c.Data(http.StatusOK, "image/gif", qr_like_bytes)
 
-	//
-	//c.JSON(http.StatusOK, qrcode)
-	output, _ := base64.StdEncoding.DecodeString(qrcode[0])
-	c.Data(200, "image/gif", output)
 }
