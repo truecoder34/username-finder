@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"encoding/base64"
 	"errors"
 	"net/http"
 	"username-finder/server/service"
@@ -35,5 +36,7 @@ func QRcodegenerator(c *gin.Context) {
 	qrcode := service.QRcodeService.QRCodeGenerate(matchedUrls)
 
 	//
-	c.JSON(http.StatusOK, qrcode)
+	//c.JSON(http.StatusOK, qrcode)
+	output, _ := base64.StdEncoding.DecodeString(qrcode[0])
+	c.Data(200, "image/gif", output)
 }
