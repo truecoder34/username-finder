@@ -10,8 +10,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "go-rabbit-mq/sender/sender.go",
-            "args": ["HELLO"]
+            "program": "server/main.go"
         }
     ]
 }

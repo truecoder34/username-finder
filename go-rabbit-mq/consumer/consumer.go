@@ -3,7 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/truecoder34/username-finder/go-rabbit-mq/lib/event"
+	"username-finder/go-rabbit-mq/lib/event"
+
 	"github.com/streadway/amqp"
 )
 
@@ -20,4 +21,3 @@ func main() {
 	}
 	consumer.Listen(os.Args[1:])
 }
-As can be seen this is a re

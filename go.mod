@@ -25,6 +25,7 @@ require (
 )
 
 require (
+	github.com/Pungyeon/go-rabbitmq-example v0.0.0-20180410133832-115c37c49590
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gin-gonic/gin v1.7.7
 	github.com/pmezard/go-difflib v1.0.0 // indirect
