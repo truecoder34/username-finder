@@ -63,7 +63,7 @@ func (e *Emitter) Push(event string, severity string) error {
 	func to return new event.Emitter object
 	detect is connection is esteblished
 */
-func NewEventEmmitter(conn *amqp.Connection) (Emitter, error) {
+func NewEventEmitter(conn *amqp.Connection) (Emitter, error) {
 	emitter := Emitter{
 		connection: conn,
 	}

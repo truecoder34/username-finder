@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"os"
 
+	"username-finder/go-rabbit-mq/lib/event"
+
 	"github.com/streadway/amqp"
-	"github.com/truecoder34/username-finder/go-rabbit-mq/lib/event"
+	//"github.com/Pungyeon/go-rabbitmq-example/lib/event"
 )
 
 func main() {

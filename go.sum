@@ -1,3 +1,5 @@
+github.com/Pungyeon/go-rabbitmq-example v0.0.0-20180410133832-115c37c49590 h1:8A39vzpG6nyUWQqwwFeoIG2acuGZg4vWbZ84n8MqwjE=
+github.com/Pungyeon/go-rabbitmq-example v0.0.0-20180410133832-115c37c49590/go.mod h1:qPJ296NXaWdq9pfj7GuK86CSuUcGKPvXmjlquVM7ps4=
 github.com/boombuler/barcode v1.0.1 h1:NDBbPmhS+EqABEs5Kg3n/5ZNjy73Pz7SIV+KCeqyXcs=
 github.com/boombuler/barcode v1.0.1/go.mod h1:paBWMcWSl3LHKBqUq+rly7CNSldXjb2rDl3JlRe0mD8=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
