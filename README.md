@@ -22,16 +22,24 @@ Docker RabbitMQ:
 	#t0> docker run --detach --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 ```
 
-Consumer :
+####Consumer :
 ```
 	#t1> cd rabbit-mq-receiver
 	#t1> go run .\receive-mq.go
 ```
 
-Server : 
+####Server-API (Sender#1): 
+Simple API. Will push messages each time when endpoints are used. 
 ```
 	#t2> cd server
 	#t2> go run .\main.go
+```
+
+####Sender #2
+Simple sender which push messages to the same queue. 
+```
+#t3> cd .\rabbit-mq-sender\
+#t3> go run .\send-mq.go
 ```
 
 
