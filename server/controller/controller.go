@@ -4,17 +4,19 @@ import (
 	"encoding/base64"
 	"errors"
 	"net/http"
+	msgbrocker "username-finder/server/helper/msgBrocker"
 	"username-finder/server/service"
 
+	"log"
+
 	"github.com/gin-gonic/gin"
-
-	"fmt"
-	"os"
-
-	"username-finder/go-rabbit-mq/lib/event"
-
-	"github.com/streadway/amqp"
 )
+
+func failOnError(err error, msg string) {
+	if err != nil {
+		log.Panicf("%s: %s", msg, err)
+	}
+}
 
 func Username(c *gin.Context) {
 	var urls []string
@@ -23,20 +25,7 @@ func Username(c *gin.Context) {
 		return
 	}
 	matchedUrls := service.UsernameService.UsernameCheck(urls)
-
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672")
-	if err != nil {
-		panic(err)
-	}
-
-	emitter, err := event.NewEventEmitter(conn)
-	if err != nil {
-		panic(err)
-	}
-
-	for i := 1; i < 10; i++ {
-		emitter.Push(fmt.Sprintf("[%d] - %s", i, os.Args[1]), os.Args[1])
-	}
+	msgbrocker.Sender.SendMessage(matchedUrls, "/username")
 
 	c.JSON(http.StatusOK, matchedUrls)
 }
@@ -51,6 +40,7 @@ func QRcodegenerator(c *gin.Context) {
 
 	// 2 - check that URL exists.
 	matchedUrls := service.UsernameService.UsernameCheck(urls)
+	msgbrocker.Sender.SendMessage(matchedUrls, "/qr")
 
 	// generate QR codes for valif urls
 	qrcodes := service.QRcodeService.QRCodeGenerate(matchedUrls)
