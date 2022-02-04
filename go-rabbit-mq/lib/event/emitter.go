@@ -41,6 +41,7 @@ func (e *Emitter) setup() error {
 func (e *Emitter) Push(event string, severity string) error {
 	channel, err := e.connection.Channel()
 	if err != nil {
+		// log.Println("ERROR %s", err)
 		return err
 	}
 	defer channel.Close()
